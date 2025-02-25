@@ -1,0 +1,1 @@
+# hotel-rating-microservice
