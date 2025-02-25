@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: ConfigServer
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  cloud:
+    config:
+      server:
+        git:
+          uri:
+          clone-on-start: true
+server:
+  port: 8085
