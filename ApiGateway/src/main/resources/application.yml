@@ -1,34 +1,27 @@
-aspring:
+spring:
   application:
     name: ApiGateway
   output:
     ansi:
       enabled: ALWAYS
+
+  config:
+    import: "configserver:http://localhost:8085"
   cloud:
     gateway:
-          routes:
-            - id: USERSERVICE
-              uri: lb://USERSERVICE
-              predicates:
-                - Path=/users/**
-            - id: HOTELSERVICE
-              uri: lb://HOTELSERVICE
-              predicates:
-                - Path=/hotels/**
-            - id: RATINGSERVICE
-              uri: lb://RATINGSERVICE
-              predicates:
-                - Path=/ratings/**
+      routes:
+        - id: USERSERVICE
+          uri: lb://USERSERVICE
+          predicates:
+            - Path=/users/**
+        - id: HOTELSERVICE
+          uri: lb://HOTELSERVICE
+          predicates:
+            - Path=/hotels/**
+        - id: RATINGSERVICE
+          uri: lb://RATINGSERVICE
+          predicates:
+            - Path=/ratings/**
 
 server:
   port: 8084
-
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-  instance:
-    prefer-ip-address: true
-
