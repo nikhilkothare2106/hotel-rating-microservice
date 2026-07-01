@@ -57,7 +57,7 @@ export default function Settings() {
               id="gateway"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="http://localhost:8765"
+              placeholder="http://localhost:8084"
             />
           </div>
           <SuccessBanner message={saved} />

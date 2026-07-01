@@ -1,5 +1,5 @@
 const STORAGE_KEY = 'gatewayBaseUrl'
-const DEFAULT_BASE_URL = 'http://localhost:8765'
+const DEFAULT_BASE_URL = 'http://localhost:8084'
 
 export function getBaseUrl() {
   return localStorage.getItem(STORAGE_KEY) || DEFAULT_BASE_URL
