@@ -9,6 +9,6 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17
 WORKDIR /usr/src/myapp
 
-COPY --from=builder /usr/src/myapp/target/*.jar serviceregistry.jar
+COPY --from=builder /usr/src/myapp/target/*.jar apigateway.jar
 EXPOSE 8082
-CMD ["java","-jar","serviceregistry.jar"]
+CMD ["java","-jar","apigateway.jar"]

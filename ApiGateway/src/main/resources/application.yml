@@ -6,7 +6,7 @@ spring:
       enabled: ALWAYS
 
   config:
-    import: "configserver:http://localhost:8085"
+    import: optional:configserver:${CONFIG_SERVER:http://localhost:8085}
   cloud:
     gateway:
       routes:
@@ -24,4 +24,4 @@ spring:
             - Path=/ratings/**
 
 server:
-  port: 8084
+  port: ${SERVER_PORT:8084}
