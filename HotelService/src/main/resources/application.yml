@@ -2,22 +2,22 @@ spring:
   application:
     name: HotelService
   config:
-    import: "configserver:http://localhost:8085"
+    import: optional:configserver:${CONFIG_SERVER:http://localhost:8085}
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/hotelservice
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/hotelservice}
     username: root
-    password: root123
+    password: ${MYSQL_PASSWORD:root123}
     driver-class-name: com.mysql.cj.jdbc.Driver
   output:
     ansi:
       enabled: ALWAYS
 
 server:
-  port: 8082
+  port: ${SERVER_PORT:8082}
 
 
 # debug: true

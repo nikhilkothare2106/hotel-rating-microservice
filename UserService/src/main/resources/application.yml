@@ -2,17 +2,19 @@ spring:
   application:
     name: UserService
   config:
-    import: "configserver:http://localhost:8085"
+    import: optional:configserver:${CONFIG_SERVER:http://localhost:8085}
   output:
     ansi:
       enabled: ALWAYS
   data:
     mongodb:
-      uri:
-      database: microservice-user
-
+      uri: ${MONGO_URI}
 server:
-  port: 8081
+  port: ${SERVER_PORT:8081}
+
+
+
+
 
 management:
   health:

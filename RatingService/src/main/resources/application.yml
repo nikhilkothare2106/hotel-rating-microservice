@@ -2,17 +2,16 @@ spring:
   application:
     name: RatingService
   config:
-    import: "configserver:http://localhost:8085"
+    import: optional:configserver:${CONFIG_SERVER:http://localhost:8085}
   output:
     ansi:
       enabled: ALWAYS
   data:
     mongodb:
-      uri:
-      database: microservice-rating
+      uri: ${MONGO_URI}
 
 server:
-  port: 8083
+  port: ${SERVER_PORT:8083}
 # logging:
 #   level:
 #     org.springframework.data.mongodb.core: DEBUG
