@@ -94,12 +94,23 @@ services:
     environment:
       - SERVER_PORT=8084
       # - CONFIG_SERVER=http://configserver:8085
-      - MONGO_URI=mongodb+srv://nikhil:4kJrtrQiHdEnagor@cluster0.c5vjf.mongodb.net/microservice-user
+      - MONGO_URI=
       - EUREKA_DEFAULT_ZONE=http://serviceregistry:8761/eureka
 
-
-
-    
+  frontend:
+    build:
+      context: ./hotel-rating-frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://apigateway:8084
+    container_name: frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - apigateway
+    networks:
+      - ms-network
   # configserver:
   #   build:
   #     context: ./ConfigServer
