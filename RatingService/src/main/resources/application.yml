@@ -1,8 +1,8 @@
 spring:
   application:
     name: RatingService
-  config:
-    import: optional:configserver:${CONFIG_SERVER:http://localhost:8085}
+  # config:
+  #   import: optional:configserver:${CONFIG_SERVER:http://localhost:8085}
   output:
     ansi:
       enabled: ALWAYS
@@ -15,3 +15,13 @@ server:
 # logging:
 #   level:
 #     org.springframework.data.mongodb.core: DEBUG
+
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://serviceregistry:8761/eureka}
+  instance:
+    prefer-ip-address: true

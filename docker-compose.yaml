@@ -1,0 +1,125 @@
+services:
+  serviceregistry:
+    build:
+      context: ./ServiceRegistry
+      dockerfile: Dockerfile
+    container_name: serviceregistry
+    restart: unless-stopped
+    ports:
+      - "8761:8761"
+    networks:
+      - ms-network
+    environment:
+      - SERVER_PORT=8761
+
+
+  userservice:
+    build:
+      context: ./UserService
+      dockerfile: Dockerfile
+    container_name: userservice
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    networks:
+      - ms-network
+    environment:
+      - SERVER_PORT=8081
+      # - CONFIG_SERVER=http://configserver:8085
+      - MONGO_URI=
+      - SPRING_PROFILE=prod
+      - EUREKA_DEFAULT_ZONE=http://serviceregistry:8761/eureka
+
+  mysql:
+   image: mysql:8.0
+   container_name: mysql
+   restart: unless-stopped
+   environment:
+     MYSQL_ROOT_PASSWORD: root123
+   ports:
+     - "3306:3306"
+   volumes:
+     - mysql-data:/var/lib/mysql
+     - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+   networks:
+     - ms-network
+
+  hotelservice:
+     build:
+       context: ./HotelService
+       dockerfile: Dockerfile
+     container_name: hotelservice
+     restart: unless-stopped
+     ports:
+       - "8082:8082"
+     depends_on:
+       - mysql
+     networks:
+       - ms-network
+     environment:
+       - MYSQL_PASSWORD=root123
+       - DATABASE_URL=jdbc:mysql://mysql:3306/hotelservice
+       - SERVER_PORT=8082
+       - EUREKA_DEFAULT_ZONE=http://serviceregistry:8761/eureka
+      # - CONFIG_SERVER=http://configserver:8085
+
+  ratingservice:
+    build:
+      context: ./RatingService
+      dockerfile: Dockerfile
+    container_name: ratingservice
+    restart: unless-stopped
+    ports:
+      - "8083:8083"
+    depends_on:
+      - mysql
+    networks:
+      - ms-network
+    environment:
+      - SERVER_PORT=8083
+      # - CONFIG_SERVER=http://configserver:8085
+      - MONGO_URI=
+      - EUREKA_DEFAULT_ZONE=http://serviceregistry:8761/eureka
+
+  apigateway:
+    build:
+      context: ./ApiGateway
+      dockerfile: Dockerfile
+    container_name: apigateway
+    restart: unless-stopped
+    ports:
+      - "8084:8084"
+    networks:
+      - ms-network
+    environment:
+      - SERVER_PORT=8084
+      # - CONFIG_SERVER=http://configserver:8085
+      - MONGO_URI=mongodb+srv://nikhil:4kJrtrQiHdEnagor@cluster0.c5vjf.mongodb.net/microservice-user
+      - EUREKA_DEFAULT_ZONE=http://serviceregistry:8761/eureka
+
+
+
+    
+  # configserver:
+  #   build:
+  #     context: ./ConfigServer
+  #     dockerfile: Dockerfile
+  #   container_name: configserver
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8085:8085"
+  #   networks:
+  #     - ms-network
+  #   environment:
+  #     - SERVER_PORT=8085
+  #     - CONFIG_URI=https://github.com/nikhilkothare2106/hotel-rating-microservice-config
+  #     - DEFAULT_HOST_ZONE=http://serviceregistry:8761/eureka
+
+
+volumes:
+  mysql-data:
+    driver: local
+
+networks:
+  ms-network:
+    driver: bridge

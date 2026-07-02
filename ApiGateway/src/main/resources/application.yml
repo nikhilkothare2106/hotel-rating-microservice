@@ -5,8 +5,8 @@ spring:
     ansi:
       enabled: ALWAYS
 
-  config:
-    import: optional:configserver:${CONFIG_SERVER:http://localhost:8085}
+  # config:
+  #   import: optional:configserver:${CONFIG_SERVER:http://localhost:8085}
   cloud:
     gateway:
       routes:
@@ -25,3 +25,11 @@ spring:
 
 server:
   port: ${SERVER_PORT:8084}
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://serviceregistry:8761/eureka}
+  instance:
+    prefer-ip-address: true
