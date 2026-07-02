@@ -23,13 +23,14 @@ export default function Ratings() {
     setError('')
     Promise.all([ratingsApi.getAll(), usersApi.getAll(), hotelsApi.getAll()])
       .then(([r, u, h]) => {
+         console.log('hotels response:', h)  
         setRatings(r)
         setUsers(u)
         setHotels(h)
         setForm((f) => ({
           ...f,
           userId: f.userId || u[0]?.userId || '',
-          hotelId: f.hotelId || h[0]?.id || '',
+          hotelId: f.hotelId || h[0]?.hotelId || '',
         }))
       })
       .catch((err) => setError(err.message))
@@ -39,10 +40,11 @@ export default function Ratings() {
   useEffect(load, [])
 
   const userById = Object.fromEntries(users.map((u) => [u.userId, u]))
-  const hotelById = Object.fromEntries(hotels.map((h) => [h.id, h]))
+  const hotelById = Object.fromEntries(hotels.map((h) => [h.hotelId, h]))   // was h.id
 
   async function handleSubmit(e) {
     e.preventDefault()
+    console.log('form at submit:', form)
     if (!form.userId || !form.hotelId || !form.rating) {
       setError('Choose a guest, a hotel, and a star rating before saving.')
       return
@@ -95,7 +97,7 @@ export default function Ratings() {
                   <div className="row-card" key={r.ratingId}>
                     <div className="row-main">
                       <div className="row-title">
-                        {hotel ? <Link to={`/hotels/${hotel.id}`}>{hotel.name}</Link> : `Hotel ${r.hotelId}`}
+                        {hotel ? <Link to={`/hotels/${hotel.hotelId}`}>{hotel.name}</Link> : `Hotel ${r.hotelId}`}
                       </div>
                       <div className="row-sub">
                         by {user ? <Link to={`/guests/${user.userId}`}>{user.name}</Link> : `guest ${r.userId}`}
@@ -143,7 +145,7 @@ export default function Ratings() {
                   onChange={(e) => setForm({ ...form, hotelId: e.target.value })}
                 >
                   {hotels.map((h) => (
-                    <option key={h.id} value={h.id}>
+                    <option key={h.hotelId} value={h.hotelId}>
                       {h.name}
                     </option>
                   ))}

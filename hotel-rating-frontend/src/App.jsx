@@ -20,7 +20,7 @@ export default function App() {
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/hotels/:hotelId" element={<HotelDetail />} />
           <Route path="/ratings" element={<Ratings />} />
-          <Route path="/settings" element={<Settings />} />
+          {/* <Route path="/settings" element={<Settings />} /> */}
         </Routes>
       </main>
     </div>

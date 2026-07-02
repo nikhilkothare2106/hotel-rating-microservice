@@ -32,7 +32,7 @@ export default function Dashboard() {
   const { loading, error, users, hotels, ratings } = state
 
   const userById = Object.fromEntries(users.map((u) => [u.userId, u]))
-  const hotelById = Object.fromEntries(hotels.map((h) => [h.id, h]))
+  const hotelById = Object.fromEntries(hotels.map((h) => [h.hotelId, h]))
 
   const recent = [...ratings]
     .sort((a, b) => (b.ratingId || '').localeCompare(a.ratingId || ''))
@@ -87,10 +87,11 @@ export default function Dashboard() {
               {recent.map((r) => {
                 const hotel = hotelById[r.hotelId]
                 const user = userById[r.userId]
+                console.log(hotel)
                 return (
                   <div className="row-card" key={r.ratingId}>
                     <div className="row-main">
-                      <div className="row-title">{hotel ? hotel.name : `Hotel ${r.hotelId}`}</div>
+                      <div className="row-title">{hotel ? hotel.name : `Hotel ${r.name}`}</div>
                       <div className="row-sub">
                         rated by {user ? user.name : `guest ${r.userId}`}
                         {r.feedback ? ` — "${r.feedback}"` : ''}

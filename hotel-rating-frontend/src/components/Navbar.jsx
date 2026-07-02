@@ -5,7 +5,7 @@ const links = [
   { to: '/guests', label: 'Guests', index: '01' },
   { to: '/hotels', label: 'Hotels', index: '02' },
   { to: '/ratings', label: 'Ratings', index: '03' },
-  { to: '/settings', label: 'Settings', index: '04' },
+  // { to: '/settings', label: 'Settings', index: '04' },
 ]
 
 function NavItems({ onNavigate }) {
@@ -50,9 +50,9 @@ export default function Navbar() {
           The Ledger
         </div>
       </div>
-      <nav className="mobile-nav">
+      {/* <nav className="mobile-nav">
         <NavItems />
-      </nav>
+      </nav> */}
     </>
   )
 }

@@ -78,7 +78,7 @@ services:
     environment:
       - SERVER_PORT=8083
       # - CONFIG_SERVER=http://configserver:8085
-      - MONGO_URI=
+      - MONGO_URI
       - EUREKA_DEFAULT_ZONE=http://serviceregistry:8761/eureka
 
   apigateway:
@@ -94,7 +94,6 @@ services:
     environment:
       - SERVER_PORT=8084
       # - CONFIG_SERVER=http://configserver:8085
-      - MONGO_URI=
       - EUREKA_DEFAULT_ZONE=http://serviceregistry:8761/eureka
 
   frontend:
@@ -111,6 +110,8 @@ services:
       - apigateway
     networks:
       - ms-network
+
+
   # configserver:
   #   build:
   #     context: ./ConfigServer
