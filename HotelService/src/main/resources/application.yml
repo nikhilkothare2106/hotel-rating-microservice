@@ -8,9 +8,9 @@ spring:
       ddl-auto: update
     show-sql: true
   datasource:
-    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/hotelservice}
-    username: root
-    password: ${MYSQL_PASSWORD:root123}
+    url: ${DATABASE_URL}
+    username: ${MYSQL_ROOT:root}
+    password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   output:
     ansi:
@@ -25,7 +25,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: ${EUREKA_DEFAULT_ZONE:http://serviceregistry:8761/eureka}
+      defaultZone: ${EUREKA_DEFAULT_ZONE}
   instance:
     prefer-ip-address: true
 # debug: true
