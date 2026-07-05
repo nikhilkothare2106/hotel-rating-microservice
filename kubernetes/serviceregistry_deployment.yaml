@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serviceregistry-deployment
+  namespace: dev
+  labels:
+    app: serviceregistry-deployment-label
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: serviceregistry
+  # strategy:
+  #   type: RollingUpdate
+  #   rollingUpdate:
+  #     maxSurge: 25%
+  #     maxUnavailable: 25%
+
+  template:
+    metadata:
+      labels:
+        app: serviceregistry
+    spec:
+      nodeSelector:
+        workload: private
+
+      containers:
+        - name: serviceregistry-container
+          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/serviceregistry
+
+          ports:
+            - containerPort: 8761
+
+          # startupProbe:
+          #   httpGet:
+          #     path: /hi/actuator/health
+          #     port: 8081
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+          #   failureThreshold: 30
+          #   timeoutSeconds: 5
+
+          # livenessProbe:
+          #   httpGet:
+          #     path: /hi/actuator/health/liveness
+          #     port: 8081
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+
+          # readinessProbe:
+          #   httpGet:
+          #     path: /hi/actuator/health/readiness
+          #     port: 8081
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+
+      #     resources:
+      #       requests:
+      #         cpu: 100m
+      #         memory: 128Mi
+      #       limits:
+      #         cpu: 200m
+      #         memory: 256Mi
+
+      # tolerations:
+      #   - key: "prod"
+      #     operator: "Equal"
+      #     value: "true"
+      #     effect: "NoSchedule"
