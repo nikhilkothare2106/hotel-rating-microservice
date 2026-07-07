@@ -8,8 +8,8 @@ public class Controller {
 
 
     
-    @GetMapping("/")
-    public ResponseEntity<String> getHotel(@PathVariable String id) {
+    @GetMapping("/hi")
+    public ResponseEntity<String> getHotel() {
         return ResponseEntity.ok("Connection Successful!");
     }
 

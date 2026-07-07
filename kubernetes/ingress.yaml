@@ -8,22 +8,16 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/load-balancer-name: eks-alb
+    alb.ingress.kubernetes.io/healthcheck-path: /registry
 spec:
   ingressClassName: alb
   rules:
     - http:
         paths:
-          - path: /hi
+          - path: /registry
             pathType: Prefix
             backend:
               service:
-                name: java1-service
-                port:
-                  number: 8080
-          - path: /hello
-            pathType: Prefix
-            backend:
-              service:
-                name: java2-service
+                name: serviceregistry-service
                 port:
                   number: 8080

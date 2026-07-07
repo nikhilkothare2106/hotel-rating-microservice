@@ -26,7 +26,7 @@ spec:
 
       containers:
         - name: serviceregistry-container
-          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/serviceregistry:v1
+          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/serviceregistry:v2
 
           ports:
             - containerPort: 8761
