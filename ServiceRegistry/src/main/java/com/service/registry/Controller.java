@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 public class Controller {
 
 
-    
     @GetMapping("/hi")
     public ResponseEntity<String> getHotel() {
         return ResponseEntity.ok("Connection Successful!");
