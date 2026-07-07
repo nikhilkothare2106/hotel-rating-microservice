@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: serviceregistry-service
+  namespace: dev
+spec:
+  selector:
+    app: serviceregistry
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8761
+  type: ClusterIP
