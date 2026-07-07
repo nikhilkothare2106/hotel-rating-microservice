@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hotelservice-deployment
+  namespace: dev
+  labels:
+    app: hotelservice-deployment-label
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: hotelservice
+
+  template:
+    metadata:
+      labels:
+        app: hotelservice
+
+    spec:
+      nodeSelector:
+        workload: private
+
+      containers:
+        - name: hotelservice-container
+          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/hotelservice:v1
+
+          ports:
+            - containerPort: 8082
