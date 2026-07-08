@@ -24,7 +24,7 @@ spec:
 
       containers:
         - name: apigatewayservice-container
-          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/apigatewayservice:v1
+          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/apigatewayservice:v2
 
           ports:
             - containerPort: 8084
