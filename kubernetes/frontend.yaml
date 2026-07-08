@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontendservice-deployment
+  namespace: dev
+  labels:
+    app: frontendservice-deployment-label
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: frontendservice
+
+  template:
+    metadata:
+      labels:
+        app: frontendservice
+
+    spec:
+      nodeSelector:
+        workload: private
+
+      containers:
+        - name: frontendservice-container
+          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/frontendservice:v1
+
+          ports:
+            - containerPort: 80
+          envFrom:
+           - secretRef:
+               name: frontendservice-secret
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: frontendservice-service
+  namespace: dev
+spec:
+  selector:
+    app: frontendservice
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
+  type: ClusterIP
