@@ -30,6 +30,9 @@ spec:
 
           ports:
             - containerPort: 8761
+          envFrom:
+           - secretRef:
+               name: registry-secret
 
           # startupProbe:
           #   httpGet:
