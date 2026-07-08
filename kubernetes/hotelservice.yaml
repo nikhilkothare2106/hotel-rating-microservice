@@ -28,3 +28,19 @@ spec:
 
           ports:
             - containerPort: 8082
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: hotelservice-service
+  namespace: dev
+spec:
+  selector:
+    app: hotelservice
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8082
+  type: ClusterIP

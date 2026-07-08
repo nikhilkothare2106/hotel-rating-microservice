@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigatewayservice-deployment
+  namespace: dev
+  labels:
+    app: apigatewayservice-deployment-label
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: apigatewayservice
+
+  template:
+    metadata:
+      labels:
+        app: apigatewayservice
+
+    spec:
+      nodeSelector:
+        workload: private
+
+      containers:
+        - name: apigatewayservice-container
+          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/apigatewayservice:v1
+
+          ports:
+            - containerPort: 8084
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: apigatewayservice-service
+  namespace: dev
+spec:
+  selector:
+    app: apigatewayservice
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8084
+  type: ClusterIP

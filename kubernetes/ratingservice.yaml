@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ratingservice-deployment
+  namespace: dev
+  labels:
+    app: ratingservice-deployment-label
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: ratingservice
+
+  template:
+    metadata:
+      labels:
+        app: ratingservice
+
+    spec:
+      nodeSelector:
+        workload: private
+
+      containers:
+        - name: ratingservice-container
+          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/ratingservice:v1
+
+          ports:
+            - containerPort: 8083
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: ratingservice-service
+  namespace: dev
+spec:
+  selector:
+    app: ratingservice
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8083
+  type: ClusterIP
