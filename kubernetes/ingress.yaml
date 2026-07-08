@@ -23,7 +23,7 @@ spec:
               service:
                 name: serviceregistry-service
                 port:
-                  number: 8080
+                  number: 8761
           - path: /hotels
             pathType: Prefix
             backend:
