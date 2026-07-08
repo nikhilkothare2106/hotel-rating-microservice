@@ -28,6 +28,9 @@ spec:
 
           ports:
             - containerPort: 8084
+          envFrom:
+           - secretRef:
+               name: apigateway-secret
 
 ---
 
