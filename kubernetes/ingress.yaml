@@ -24,3 +24,31 @@ spec:
                 name: serviceregistry-service
                 port:
                   number: 8080
+          - path: /hotels
+            pathType: Prefix
+            backend:
+              service:
+                name: hotelservice-service
+                port:
+                  number: 8080
+          - path: /ratings
+            pathType: Prefix
+            backend:
+              service:
+                name: ratingservice-service
+                port:
+                  number: 8080
+          - path: /users
+            pathType: Prefix
+            backend:
+              service:
+                name: userservice-service
+                port:
+                  number: 8080
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: apigatewayservice-service
+                port:
+                  number: 8080
