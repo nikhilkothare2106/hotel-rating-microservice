@@ -2,7 +2,6 @@ package com.user.service.external.services;
 
 import com.user.service.entities.Rating;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Service
-@FeignClient(name="RATINGSERVICE")
+@FeignClient(name = "${services.rating.name}")
 public interface RatingService {
 
     @PostMapping("/ratings")

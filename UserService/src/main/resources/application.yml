@@ -80,3 +80,9 @@ resilience4j.ratelimiter:
 #   instance:
 #     prefer-ip-address: true
 
+
+services:
+  hotel:
+    name: ${HOTELSERVICE_NAME:HOTELSERVICE}
+  rating:
+    name: ${RATINGSERVICE_NAME:RATINGSERVICE}
