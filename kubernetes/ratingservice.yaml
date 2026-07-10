@@ -24,7 +24,7 @@ spec:
 
       containers:
         - name: ratingservice-container
-          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/ratingservice:v2
+          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/ratingservice:v4
 
           ports:
             - containerPort: 8083
