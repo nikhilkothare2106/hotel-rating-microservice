@@ -87,7 +87,7 @@ export default function Dashboard() {
               {recent.map((r) => {
                 const hotel = hotelById[r.hotelId]
                 const user = userById[r.userId]
-                console.log(hotel)
+                // console.log(hotel)
                 return (
                   <div className="row-card" key={r.ratingId}>
                     <div className="row-main">

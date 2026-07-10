@@ -38,11 +38,11 @@ export default function Navbar() {
           <div className="brand-tag">Hotel Rating Registry</div>
         </div>
         <NavItems />
-        <div className="sidebar-footer">
+        {/* <div className="sidebar-footer">
           Connected to the gateway
           <br />
           set in Settings.
-        </div>
+        </div> */}
       </aside>
 
       <div className="mobile-topbar">
