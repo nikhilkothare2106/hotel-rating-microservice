@@ -24,7 +24,7 @@ spec:
 
       containers:
         - name: frontendservice-container
-          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/frontendservice:v3
+          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/frontendservice:v4
           imagePullPolicy: Always
 
           ports:
