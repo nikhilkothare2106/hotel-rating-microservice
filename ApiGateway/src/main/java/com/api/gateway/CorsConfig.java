@@ -11,14 +11,18 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 @Configuration
 public class CorsConfig {
 
+    @Value("${app.frontend-url}")
+    private String frontendUrl;
+
     @Bean
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.setAllowedOriginPatterns(List.of(
-                "http://localhost",
-                "http://15.207.100.174",
-                "http://frontend"
-        ));
+        // corsConfig.setAllowedOriginPatterns(List.of(
+        //         // "http://localhost",
+        //         "http://x.x.x.x"
+        //         // "http://frontend"
+        // ));
+        corsConfig.setAllowedOriginPatterns(List.of(frontendUrl));
         corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         corsConfig.setAllowedHeaders(List.of("*"));
         corsConfig.setAllowCredentials(true);
