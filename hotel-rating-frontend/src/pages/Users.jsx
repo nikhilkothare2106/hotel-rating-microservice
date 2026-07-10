@@ -72,9 +72,9 @@ export default function Users() {
                     <div className="row-title">{u.name}</div>
                     <div className="row-sub">{u.email}</div>
                   </div>
-                  <div className="row-meta">
+                  {/* <div className="row-meta">
                     <span className="pill">{u.userId}</span>
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>

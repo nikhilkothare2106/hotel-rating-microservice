@@ -1,6 +1,6 @@
 const STORAGE_KEY = 'gatewayBaseUrl'
 const DEFAULT_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8084'
-
+console.log("DEFAULT_BASE_URL   ",DEFAULT_BASE_URL)
 export function getBaseUrl() {
   return localStorage.getItem(STORAGE_KEY) || DEFAULT_BASE_URL
 }
