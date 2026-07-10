@@ -24,7 +24,7 @@ spec:
 
       containers:
         - name: userservice-container
-          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/userservice:v3
+          image: 186581960368.dkr.ecr.ap-south-1.amazonaws.com/userservice:v4
 
           ports:
             - containerPort: 8081
