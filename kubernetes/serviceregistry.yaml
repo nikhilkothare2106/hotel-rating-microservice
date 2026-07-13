@@ -80,6 +80,8 @@ apiVersion: v1
 metadata:
   name: serviceregistry-service
   namespace: dev
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: /registry/actuator/health
 spec:
   selector:
     app: serviceregistry
