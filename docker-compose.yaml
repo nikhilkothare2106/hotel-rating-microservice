@@ -127,7 +127,6 @@ services:
   #     - CONFIG_URI=https://github.com/nikhilkothare2106/hotel-rating-microservice-config
   #     - DEFAULT_HOST_ZONE=http://serviceregistry:8761/eureka
 
-
 volumes:
   mysql-data:
     driver: local

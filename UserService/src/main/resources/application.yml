@@ -84,5 +84,6 @@ resilience4j.ratelimiter:
 services:
   hotel:
     name: ${HOTELSERVICE_NAME:HOTELSERVICE}
+    url:  ${HOTEL_SERVICE_URL:}
   rating:
     name: ${RATINGSERVICE_NAME:RATINGSERVICE}
