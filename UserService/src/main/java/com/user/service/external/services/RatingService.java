@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Service
-@FeignClient(name = "${services.rating.name}")
+@FeignClient(
+    name = "${services.rating.name}",
+    url = "${services.rating.url:}"
+)
 public interface RatingService {
 
     @PostMapping("/ratings")

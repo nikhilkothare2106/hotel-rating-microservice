@@ -87,3 +87,4 @@ services:
     url:  ${HOTEL_SERVICE_URL:}
   rating:
     name: ${RATINGSERVICE_NAME:RATINGSERVICE}
+    url:  ${RATING_SERVICE_URL:}
