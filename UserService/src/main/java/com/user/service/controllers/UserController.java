@@ -43,6 +43,12 @@ public class UserController {
         return ResponseEntity.ok(allUsers);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> getAllUserswithRating() {
+        List<User> allUsers = userService.getAllUsersWithRating();
+        return ResponseEntity.ok(allUsers);
+    }
+
     //fall back method for circuit breaker
 
     public ResponseEntity<User> ratingHotelFallBack(String userId, Exception exception) {

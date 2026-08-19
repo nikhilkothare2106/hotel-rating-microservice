@@ -45,6 +45,25 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public List<User> getAllUsersWithRating() {
+        List<User> users = userRepository.findAll();
+
+        List<User> usersWithRatings = users.stream().map(user -> {
+            List<Rating> ratingByUserId = ratingService.getRatingByUserId(user.getUserId());
+
+            List<Rating> ratingList = ratingByUserId.stream().map(rating -> {
+                Hotel hotel = hotelService.getHotel(rating.getHotelId());
+                rating.setHotel(hotel);
+                return rating;
+            }).collect(Collectors.toList());
+
+            user.setRatings(ratingList);
+            return user;
+        }).collect(Collectors.toList());
+
+        return usersWithRatings;
+    }
+
     public User getUser(String id){
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + id));
 
